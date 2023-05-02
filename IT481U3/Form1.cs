@@ -1,4 +1,4 @@
-namespace IT481U3
+namespace IT481U9
 {
     public partial class Form1 : Form
     {
@@ -25,6 +25,7 @@ namespace IT481U3
             button7.Click += new EventHandler(button7_Click);
         }
 
+
         //Button 1 connection to the database
         private void button1_Click(object sender, EventArgs e)
         {
@@ -36,14 +37,44 @@ namespace IT481U3
             password = textBox2.Text;
             server = textBox3.Text;
             database = textBox4.Text;
+            long num1 = 0;
 
             //Determining if the text boxes are filled in.
-            if (user.Length == 0 || password.Length == 0 ||
-                server.Length == 0 || database.Length == 0)
+            if (user.Length == 0 || server.Length == 0 || database.Length == 0)
             {
                 isValid = false;
                 MessageBox.Show("You must enter user name, password, server, and database values");
             }
+            //Identifying which users can log-in
+            else if (!user.Equals("user_ceo", StringComparison.OrdinalIgnoreCase) &&
+                    !user.Equals("user_sales", StringComparison.OrdinalIgnoreCase) &&
+                    !user.Equals("user_hr", StringComparison.OrdinalIgnoreCase))
+            {
+                isValid = false;
+                MessageBox.Show("Invalid user detected. Please enter a valid user for the database.");
+            }
+            //Checking password length
+            else if (password.Length < 6)
+            {
+                isValid = false;
+                MessageBox.Show("Password length must be 6 characters or more");
+            }
+            //Checking if password has spaces
+            else if (password.Contains(" "))
+            {
+                isValid = false;
+                MessageBox.Show("No spaces are accepted re-enter password.");
+            }
+            else
+            {
+                //Checking for password to be numbers
+                if (!long.TryParse(password, out num1))
+                {
+                    isValid = false;
+                    MessageBox.Show("You must enter numbers for the password");
+                }
+            }
+
 
             //If fields are filled then connection to database is sent.
             if (isValid)
@@ -99,6 +130,5 @@ namespace IT481U3
             string names = controller.getEmployeeNames();
             MessageBox.Show(names, "Employee names");
         }
-
     }
 }

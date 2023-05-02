@@ -1,4 +1,4 @@
-﻿namespace IT481U3
+﻿namespace IT481U9
 {
     partial class Form1
     {
@@ -162,6 +162,7 @@
             // 
             textBox2.Location = new Point(75, 42);
             textBox2.Name = "textBox2";
+            textBox2.PasswordChar = '*';
             textBox2.Size = new Size(117, 23);
             textBox2.TabIndex = 12;
             // 
@@ -271,6 +272,7 @@
             Controls.Add(label1);
             Name = "Form1";
             Text = "Form1";
+            ResumeLayout(false);
             PerformLayout();
         }
 
